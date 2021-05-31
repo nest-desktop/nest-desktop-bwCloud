@@ -1,0 +1,10 @@
+[Unit]
+Description=NEST Desktop
+Requires=network.target
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/docker run --rm -dt -p 8000:8000 --name nest-desktop {{ nest_desktop_image }}
+
+[Install]
+WantedBy=network.target

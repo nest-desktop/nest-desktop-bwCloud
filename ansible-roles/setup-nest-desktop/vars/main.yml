@@ -1,0 +1,7 @@
+# NEST Server
+nest_server_version: dev
+nest_server_image: nestdesktop/nest-server:{{ nest_desktop_version }}
+
+# NEST Desktop
+nest_desktop_version: dev
+nest_desktop_image: nestdesktop/app:{{ nest_desktop_version }}

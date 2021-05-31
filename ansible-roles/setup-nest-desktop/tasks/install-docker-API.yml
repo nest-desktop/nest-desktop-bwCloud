@@ -1,0 +1,35 @@
+---
+- include: tasks/distro.yml
+
+- name: Docker API | Install Flask
+  apt:
+    name: python3-flask
+    state: latest
+    update_cache: yes
+
+- name: Docker API | Install Pip
+  apt:
+    name: python3-pip
+    state: latest
+    update_cache: yes
+
+- name: Docker API | Install Docker via pip
+  shell: "pip3 install docker"
+
+- name: Docker API | Copy Flask App
+  template:
+    src: docker-API/app.py
+    dest: /home/ubuntu/app.py
+    mode: 644
+
+- name: Docker API | Create systemd unit file
+  template:
+    src: docker-API/docker-API.service.j2
+    dest: /etc/systemd/system/docker-API.service
+    mode: 644
+
+- name: Docker API | Activate docker-API.service on boot
+  systemd:
+    name: docker-API
+    enabled: yes
+    daemon-reload: yes

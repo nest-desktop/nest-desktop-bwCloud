@@ -1,0 +1,10 @@
+[Unit]
+Description=Container manager
+Requires=network.target docker.service
+After=network.target docker.service
+
+[Service]
+ExecStart=python3 /home/ubuntu/app.py
+
+[Install]
+WantedBy=network.target
