@@ -45,7 +45,7 @@ def container_status(name):
 
 
 @app.route('/container/<name>/stop', methods=['GET', ])
-def container_restart(name):
+def container_stop(name):
     container = client.containers.get(name)
     container.stop()
     return 'Container {} stopped.\n'.format(name)
@@ -70,7 +70,7 @@ def image_start(name):
     image = client.images.get(name)
     port = request.args.get('port')
     container = client.containers.run(image,
-                                      detach=True),
+                                      detach=True,
                                       name=request.args.get('name'),
                                       ports={'{}/tcp'.format(port): port}
                                       )
