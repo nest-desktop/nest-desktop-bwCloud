@@ -1,3 +1,4 @@
 *.sif
 *.sh
 .htpasswd
+nest-desktop.json
