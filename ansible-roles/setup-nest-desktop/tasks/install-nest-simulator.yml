@@ -1,0 +1,15 @@
+---
+- name: NEST Simulator | Pull docker image {{ nest_simulator_image }}
+  shell: "docker pull {{ nest_simulator_image }}"
+
+- name: NEST Simulator | Create systemd unit file
+  template:
+    src: nest-simulator.service.j2
+    dest: /etc/systemd/system/nest-simulator.service
+    mode: 644
+
+- name: NEST Simulator | Activate nest-simulator.service on boot
+  systemd:
+    name: nest-simulator
+    enabled: yes
+    daemon-reload: yes
