@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %} Docker images {% endblock %}
+{% block head %} {{ super() }} {% endblock %}
+
+{% block content %}
+
+<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 11">
+  <div class="toast bg-success text-white" id="containerStartedSuccess">
+    <div class="d-flex">
+      <div class="toast-body">
+        Container is sucessfully started.
+      </div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+
+  <div class="toast bg-danger text-white" id="containerStartedFail">
+    <div class="d-flex">
+      <div class="toast-body">
+        Container is aready in use.
+      </div>
+      <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="logs"> Dashboard </li>
+  </ol>
+</nav>
+
+<card class="mt-5">
+  <card-body>
+    <card-title>
+      <h5> Docker images </h5>
+    </card-title>
+
+    <card-text>
+      <table class="table table-hover">
+
+        <tbody>
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Tag</th>
+            <th scope="col">ID</th>
+            <th scope="col">Actions</th>
+            <th scope="col" style="min-width:32px"></th>
+          </tr>
+        </thead>
+
+        {% for image in images %}
+          <tr id="{{ image.label }}">
+            <td>{{ image.label }}</td>
+            <td>
+              <span class="badge bg-primary">{{ image.tag }}</span>
+            </td>
+            <td>
+              {{ image.short_id }}
+            </td>
+            <td>
+              <a class="text-decoration-none mx-2 start" href="#"> run </a>
+            </td>
+            <td>
+              <span class="spinner-border spinner-border-sm" style="display:none"></span>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </card-text>
+  </card-body>
+</card>
+
+{% endblock %}
+
+{% block script %}
+
+$( document ).ready(function() {
+  $('.start').click(function() {
+    $('a').addClass('disabled');
+    $(".toast").toast("hide");
+    const row = $(this).parents('tr');
+    const name = row.attr('id');
+    row.find('.spinner-border').show();
+    $.get('api/container/' + name + '/run')
+    .done(() => {
+      $("#containerStartedSuccess").toast("show");
+    })
+    .fail(() => {
+      $("#containerStartedFail").toast("show");
+    })
+    .always(() => {
+      $('a').removeClass('disabled');
+      row.find('.spinner-border').hide();
+    })
+  });
+});
+
+{% endblock %}

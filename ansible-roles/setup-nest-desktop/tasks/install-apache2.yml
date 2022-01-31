@@ -7,7 +7,7 @@
     state: latest
     update_cache: yes
 
-- name: Apache | Set virtual host
+- name: Apache | Set virtual host for http
   template:
     src: apache2/vhost.conf
     dest: /etc/apache2/sites-enabled/000-default.conf

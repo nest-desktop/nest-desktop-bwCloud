@@ -1,7 +1,7 @@
 # NEST Simulator
-nest_simulator_version: 3.0
-nest_simulator_image: nestdesktop/nest-simulator:{{ nest_simulator_version }}
+nest_simulator_version: 3.2
+nest_simulator_image: docker-registry.ebrains.eu/nest/nest-simulator:{{ nest_simulator_version }}
 
 # NEST Desktop
-nest_desktop_version: 3.0
-nest_desktop_image: nestdesktop/app:{{ nest_desktop_version }}
+nest_desktop_version: 3.1.0snm22
+nest_desktop_image: docker-registry.ebrains.eu/nest/nest-desktop:{{ nest_desktop_version }}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    {% block head %}
+    <link href="{{ base_url }}static/css/bootstrap.min.css" rel="stylesheet" />
+    <title>{% block title %}{% endblock %}</title>
+    <script src="{{ base_url }}static/js/jquery-3.6.0.min.js"></script>
+    <script src="{{ base_url }}static/js/popper.min.js"></script>
+    {% endblock %}
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand">Docker dashboard</a>
+        <nav class="nav">
+          <a class="nav-link" href="{{ base_url }}containers">Containers</a>
+          <a class="nav-link" href="{{ base_url }}images">Images</a>
+        </nav>
+      </div>
+    </nav>
+
+    <div id="content" class="container main-container h-100">
+      {% block content %}{% endblock %}
+    </div>
+
+    <div id="footer" class="container text-center">
+      {% block footer %}{% endblock %}
+    </div>
+
+    <footer>
+      <script src="{{ base_url }}static/js/bootstrap.min.js"></script>
+      <script>
+        {% block script %}{% endblock %}
+      </script>
+    </footer>
+  </body>
+</html>

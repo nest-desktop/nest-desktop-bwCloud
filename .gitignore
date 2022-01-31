@@ -1,4 +1,4 @@
 *.sif
 *.sh
-.htpasswd
+.htpasswd*
 nest-desktop.json

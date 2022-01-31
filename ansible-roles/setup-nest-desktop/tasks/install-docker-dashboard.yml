@@ -1,0 +1,35 @@
+---
+- include: tasks/distro.yml
+
+- name: Docker Dashboard | Install Flask
+  apt:
+    name: python3-flask
+    state: latest
+    update_cache: yes
+
+- name: Docker Dashboard | Install pip
+  apt:
+    name: python3-pip
+    state: latest
+    update_cache: yes
+
+- name: Docker Dashboard | Install Docker via pip
+  shell: "pip3 install docker"
+
+- name: Docker Dashboard | Copy Flask App
+  copy:
+    src: docker-dashboard
+    dest: /home/ubuntu
+    mode: 644
+
+- name: Docker Dashboard | Create systemd unit file
+  template:
+    src: docker-dashboard.service.j2
+    dest: /etc/systemd/system/docker-dashboard.service
+    mode: 644
+
+- name: Docker Dashboard | Activate docker-dashboard.service on boot
+  systemd:
+    name: docker-dashboard
+    enabled: yes
+    daemon-reload: yes

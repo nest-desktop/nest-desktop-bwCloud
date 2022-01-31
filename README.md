@@ -29,7 +29,7 @@ source Project_<username>-openrc.sh
 ```
 
 Change configuration file in ``nest-desktop.json``.
-``source_image`` and ``networks`` are taken from bwCloud dashboard.
+Values for ``source_image`` and ``networks`` are taken from bwCloud dashboard.
 
 Start build an image for NEST Desktop
 ```

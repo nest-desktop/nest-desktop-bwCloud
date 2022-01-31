@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Active containers{% endblock%}
+{% block head %} {{ super() }} {% endblock %} {% block content %}
+
+<div class="my-5">
+  <h5> Active containers </h5>
+
+  <table class="table">
+
+  <tbody>
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Status</th>
+      <th scope="col">ID</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+
+  {% for container in containers %}
+    <tr>
+      <td>{{ container.name }}</td>
+      <td>
+        <span class="badge bg-success">{{ container.status }}</span>
+      </td>
+      <td>
+        {{ container.short_id }}
+      </td>
+      <td>
+        <a class="btn btn-outline-primary btn-sm" href="{{container.short_id}}/logs" target="_blank"> logs </a>
+        <a class="btn btn-outline-primary btn-sm" href="{{container.short_id}}/restart"> restart </a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %} Container logs {% endblock %}
+{% block head %} {{ super() }} {% endblock %}
+
+{% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{{ base_url }}">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item"> container </li>
+    <li class="breadcrumb-item"> {{ id }} </li>
+    <li class="breadcrumb-item active" aria-current="logs"> logs </li>
+  </ol>
+</nav>
+
+<card class="mt-5">
+  <card-body>
+    <card-title>
+      <h5> Container logs </h5>
+    </card-title>
+    <card-text>
+      <pre>
+        {{ logs | safe }}
+      </pre>
+    </card-text>
+  </card-body>
+</card>
+
+{% endblock %}
