@@ -9,20 +9,20 @@ client = docker.client.from_env()
 
 configs = {
     'nest-desktop': {
-        'image': 'docker-registry.ebrains.eu/nest/nest-desktop:3.1.0snm22',
+        'image': 'docker-registry.ebrains.eu/nest/nest-desktop:3.2_rc1',
         'kwargs': {
             'detach': True,
             'name': 'nest-desktop',
-            'ports': {'80/tcp': 8000},
+            'ports': {'54286/tcp': 54286},
         }
     },
     'nest-simulator': {
-        'image': 'docker-registry.ebrains.eu/nest/nest-simulator:3.2',
+        'image': 'docker-registry.ebrains.eu/nest/nest-simulator:3.4_rc1',
         'kwargs': {
             'detach': True,
             'environment': ["NEST_CONTAINER_MODE=nest-server"],
             'name': 'nest-simulator',
-            'ports': {'5000/tcp': 5000},
+            'ports': {'52425/tcp': 52425},
         }
     }
 }
@@ -84,4 +84,4 @@ def images():
     return render_template('images.html', base_url=base_url, images=imagesData)
 
 
-app.run(port=5001)
+app.run(port=5000)

@@ -1,0 +1,23 @@
+---
+- include: tasks/distro.yml
+
+- name: Jupyter Lab | Install pip
+  apt:
+    name: python3-pip
+    state: latest
+    update_cache: yes
+
+- name: Jupyter Lab | Install jupyter-lab via pip
+  shell: "pip3 install jupyter-lab"
+
+- name: Jupyter Lab | Create systemd unit file
+  template:
+    src: jupyter-lab.service.j2
+    dest: /etc/systemd/system/jupyter-lab.service
+    mode: 644
+
+- name: Jupyter Lab | Activate jupyter-lab.service on boot
+  systemd:
+    name: jupyter-lab
+    enabled: yes
+    daemon-reload: yes

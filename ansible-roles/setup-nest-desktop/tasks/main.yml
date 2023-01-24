@@ -3,5 +3,6 @@
 - include: tasks/install-apache2-ssl.yml
 - include: tasks/install-docker.yml
 - include: tasks/install-docker-dashboard.yml
+# - include: tasks/install-jupyter-lab.yml
 - include: tasks/install-nest-desktop.yml
 - include: tasks/install-nest-simulator.yml

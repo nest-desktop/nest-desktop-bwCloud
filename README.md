@@ -3,9 +3,9 @@
 
 ### Preparation
 
-Build singularity container for Ansible and packer
+Build apptainer container for Ansible and packer
 ```
-sudo singularity build bwCloud-packer.sif ./singularity/bwCloud-packer.def
+sudo apptainer build bwCloud-packer.sif ./apptainer/bwCloud-packer.def
 ```
 
 Modify image_name, source_image and networks in nest-desktop.json
@@ -17,14 +17,14 @@ htpasswd -c ./ansible-roles/setup-nest-desktop/templates/apache2/.htpasswd <user
 
 ### Build an image
 
-Start singularity container for ansible and packer
+Start apptainer for ansible and packer
 ```
-singularity shell bwCloud-packer.sif
+apptainer shell bwCloud-packer.sif
 ```
 
 Download OpenStack RC File (top right of bwCloud dashboard)
 ```
-source Project_<username>-openrc.sh
+source *-openrc.sh
  -> enter password
 ```
 
