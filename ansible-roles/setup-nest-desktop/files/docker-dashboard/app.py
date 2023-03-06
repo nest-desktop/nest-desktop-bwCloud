@@ -8,8 +8,17 @@ app.config["APPLICATION_ROOT"] = base_url
 client = docker.client.from_env()
 
 configs = {
+    'jupyter-lab': {
+        'image': 'docker-registry.ebrains.eu/nest/nest-simulator:3.4',
+        'kwargs': {
+            'detach': True,
+            'environment': ["NEST_CONTAINER_MODE=jupyterlab"],
+            'name': 'jupyter-lab',
+            'ports': {'8080/tcp': 8080},
+        }
+    },
     'nest-desktop': {
-        'image': 'docker-registry.ebrains.eu/nest/nest-desktop:3.2_rc1',
+        'image': 'docker-registry.ebrains.eu/nest/nest-desktop:3.2',
         'kwargs': {
             'detach': True,
             'name': 'nest-desktop',
@@ -17,7 +26,7 @@ configs = {
         }
     },
     'nest-simulator': {
-        'image': 'docker-registry.ebrains.eu/nest/nest-simulator:3.4_rc1',
+        'image': 'docker-registry.ebrains.eu/nest/nest-simulator:3.4',
         'kwargs': {
             'detach': True,
             'environment': ["NEST_CONTAINER_MODE=nest-server"],

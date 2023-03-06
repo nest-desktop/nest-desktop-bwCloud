@@ -4,7 +4,7 @@ Requires=network.target
 After=network.target
 
 [Service]
-ExecStart=jupyter-lab --no-browser
+ExecStart=/usr/bin/docker run --rm -dt -e LOCAL_USER_ID=`id -u $USER` -v $(pwd):/opt/data -e NEST_CONTAINER_MODE=jupyterlab -p 8080:8080 --name jupyter-lab {{ nest_simulator_image }}
 
 [Install]
 WantedBy=network.target

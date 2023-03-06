@@ -1,14 +1,6 @@
 ---
-- include: tasks/distro.yml
-
-- name: Jupyter Lab | Install pip
-  apt:
-    name: python3-pip
-    state: latest
-    update_cache: yes
-
-- name: Jupyter Lab | Install jupyter-lab via pip
-  shell: "pip3 install jupyter-lab"
+- name: Jupyter Lab | Pull docker image {{ nest_simulator_image }}
+  shell: "docker pull {{ nest_simulator_image }}"
 
 - name: Jupyter Lab | Create systemd unit file
   template:
